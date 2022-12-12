@@ -23,8 +23,8 @@
     "Proxy",
     "Proxies"
   ],
-  "author": "Anil Sagar <anil614sagar@gmail.com> (https://in.linkedin.com/in/anilsagar/)",
-  "license": "MIT",
+  "author": "Google LLC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/apigee/openapi2apigee/issues"
   },
