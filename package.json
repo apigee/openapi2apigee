@@ -1,0 +1,70 @@
+{
+  "name": "openapi2apigee",
+  "version": "0.9.0",
+  "description": "A tool that converts openapi yaml file to Apigee API Proxy Bundle",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && ./node_modules/.bin/mocha test/commands/config.js test/commands/*.js",
+    "coverage": "nyc _mocha -- test/util test/commands -R spec"
+  },
+  "bin": {
+    "openapi2apigee": "bin/openapi2apigee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apigee/openapi2apigee.git"
+  },
+  "keywords": [
+    "Apigee",
+    "OpenAPI",
+    "Swagger",
+    "Tool",
+    "API",
+    "Proxy",
+    "Proxies"
+  ],
+  "author": "Anil Sagar <anil614sagar@gmail.com> (https://in.linkedin.com/in/anilsagar/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apigee/openapi2apigee/issues"
+  },
+  "homepage": "https://github.com/apigee/openapi2apigee",
+  "dependencies": {
+    "apigeetool": "0.15.0",
+    "async": "^2.1.2",
+    "commander": "^2.8.1",
+    "easy-zip": "0.0.4",
+    "inquirer": "1.2.3",
+    "lodash.assign": "4.2.0",
+    "lodash.omit": "4.5.0",
+    "mkdirp": "0.5.1",
+    "stream-from-array": "1.0.0",
+    "swagger-parser": "10.0.0",
+    "xmlbuilder": "8.2.2"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "openapi-utils-param-to-schema": "0.0.8",
+    "openapi-utils-path-for-uri": "0.0.6",
+    "openapi-utils-schema-from-api": "0.0.4",
+    "policify": "0.0.12",
+    "rimraf": "^2.5.4",
+    "should": "^11.1.1",
+    "standard": "^8.6.0",
+    "uglify-js": "^2.7.4",
+    "xml2js": "^0.4.17",
+    "z-schema": "^3.18.1"
+  },
+  "standard": {
+    "globals": [
+      "should",
+      "describe",
+      "it"
+    ],
+    "ignore": [
+      "./lib/resource_templates/jsc/bundle-policify.js",
+      "lib/resource_templates/jsc/bundle-policify.js"
+    ]
+  }
+}

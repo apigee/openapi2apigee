@@ -1,0 +1,50 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- elements:
+  - element: Header
+    name: Cookie
+  - element: QueryParam
+    name: .*
+  - element: XMLPayload
+    name: null
+  rule: !!js/regexp /(i:[ /+\t\"\'`]style[ /+\t]*?=.*([:=]|(&#x?0*((58)|(3A)|(61)|(3D));?)).*?([(\\\\]|(&#x?0*((40)|(28)|(92)|(5C));?)))/
+- elements:
+  - element: Header
+    name: Cookie
+  - element: QueryParam
+    name: .*
+  - element: XMLPayload
+    name: null
+  rule: !!js/regexp /(i:[ /+\t\"\'`]on\[a-z]\[a-z]\[a-z]+?[ +\t]*?=.)/
+- elements:
+  - element: Header
+    name: Cookie
+  - element: QueryParam
+    name: .*
+  - element: XMLPayload
+    name: null
+  rule: !!js/regexp /(i:[ /+\t\"\'`]datasrc[ +\t]*?=.)/
+- elements:
+  - element: QueryParam
+    name: .*
+  rule: !!js/regexp /[\s]*((delete)|(exec)|(drop\s*table)|(insert)|(shutdown)|(update)|(\bor\b))/
+- elements:
+  - element: QueryParam
+    name: .*
+  rule: !!js/regexp /[\s]*(hack)/
+- elements:
+  - element: QueryParam
+    name: .*
+  rule: !!js/regexp /(?:create\s+function\s+\w+\s+returns)|(?:;\s*?(?:select|create|rename|truncate|load|alter|delete|update|insert|desc)\s*?[\[(]?\w{2,})/i
