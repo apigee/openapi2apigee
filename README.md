@@ -45,3 +45,9 @@ $ openapi2apigee generateApi petStore -s http://petstore.swagger.io/v2/swagger.j
 
 [npm-badge]: https://badge.fury.io/js/openapi2apigee.svg
 [npm-url]: https://badge.fury.io/js/openapi2apigee
+
+___
+
+## Support
+
+This is not an officially supported Google product
