@@ -2,7 +2,6 @@ openapi-apigee-node-utility
 ===========================
 
 [![npm version][npm-badge]][npm-url]
-[![Build Status][travis-badge]][travis-url]
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 `openapi2apigee` module converts a standard Open API spec (previously known as Swagger) into an Apigee API Proxy bundle and deploys into an Apigee Organization.
