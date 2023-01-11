@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/apigee/openapi2apigee",
   "dependencies": {
-    "apigeetool": "0.15.0",
+    "apigeetool": "0.15.2",
     "async": "^2.1.2",
     "commander": "^2.8.1",
     "easy-zip": "0.0.4",
