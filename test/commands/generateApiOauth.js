@@ -24,17 +24,16 @@ var fs = require('fs')
 const xml2js = require('xml2js')
 
 describe('generateApi', function () {
-    var options = {
-        source: path.join(__dirname, '/openapi_files/oapi.json'),
-        destination: path.join(__dirname, '../../api_bundles'),
-        backendurl: 'https://app-name-env.gcp.companyname.companylocation.loc/serviceName',
-        oauth: 'true',
-        apiProxy: 'petStoreOauth'
-    }
+  var options = {
+    source: path.join(__dirname, '/openapi_files/oapi.json'),
+    destination: path.join(__dirname, '../../api_bundles'),
+    backendurl: 'https://app-name-env.gcp.companyname.companylocation.loc/serviceName',
+    oauth: 'true',
+    apiProxy: 'petStoreOauth'
+  }
   describe('generate', function () {
     it('Correct openapi file should not generate error..', function (done) {
-
-      generateApi.generateApi("petStoreOauth", options, function (err, reply) {
+      generateApi.generateApi('petStoreOauth', options, function (err, reply) {
         should.equal(err, null)
         done()
       })
@@ -42,7 +41,7 @@ describe('generateApi', function () {
   })
   describe('Add oauth policy', function () {
     it('Oauth policy should be generated', function (done) {
-      var oauthFilePath = path.join(options.destination, options.apiProxy +'/apiproxy/policies/verifyAccessToken.xml')
+      var oauthFilePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/verifyAccessToken.xml')
       var oauthFile = fs.lstatSync(oauthFilePath)
       should.equal(oauthFile.isFile(), true)
 
