@@ -23,7 +23,7 @@ var generateSkeleton = require('../../lib/commands/generateApi/generateSkeleton.
 var fs = require('fs')
 const xml2js = require('xml2js')
 
-describe('generateApi', function () {
+describe('generateApi with oauth', function () {
   var options = {
     source: path.join(__dirname, '/openapi_files/oapi.json'),
     destination: path.join(__dirname, '../../api_bundles'),
