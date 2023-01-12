@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-var path = require('path')
-var rimraf = require('rimraf')
+const path = require('path')
+const rimraf = require('rimraf')
 
 console.log('Remove generated bundles...')
 rimraf.sync(path.join(__dirname, '../../api_bundles'))

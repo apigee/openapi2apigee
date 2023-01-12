@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-var ZSchema = require('z-schema')
-var openapiUtilPath = require('openapi-utils-path-for-uri')
-var openapiUtilParam = require('openapi-utils-param-to-schema')
-var openapiUtilSchema = require('openapi-utils-schema-from-api')
+let ZSchema = require('z-schema')
+const openapiUtilPath = require('openapi-utils-path-for-uri')
+const openapiUtilParam = require('openapi-utils-param-to-schema')
+const openapiUtilSchema = require('openapi-utils-schema-from-api')
 
 ZSchema = new ZSchema({
   breakOnFirstError: true,
@@ -26,7 +26,7 @@ ZSchema = new ZSchema({
   reportPathAsArray: true
 })
 
-var policify = {
+const policify = {
   validateSchema: function (injected, schema) {
     return ZSchema.validate(injected, schema)
   },

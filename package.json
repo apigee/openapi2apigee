@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && ./node_modules/.bin/mocha test/commands/config.js test/commands/*.js",
+    "fix": "standard lib --fix",
     "coverage": "nyc _mocha -- test/util test/commands -R spec"
   },
   "bin": {

@@ -16,14 +16,14 @@ limitations under the License.
 
 'use strict'
 
-var should = require('should')
-var path = require('path')
-var generateApi = require('../../lib/commands/generateApi/generateApi')
-var fs = require('fs')
-var xml2js = require('xml2js')
+const should = require('should')
+const path = require('path')
+const generateApi = require('../../lib/commands/generateApi/generateApi')
+const fs = require('fs')
+const xml2js = require('xml2js')
 
 describe('generateApi with headers', function () {
-  var options = {
+  const options = {
     source: path.join(__dirname, '/openapi_files/headers.yaml'),
     destination: path.join(__dirname, '../../api_bundles'),
     apiProxy: 'petStoreHeaders'
@@ -40,17 +40,17 @@ describe('generateApi with headers', function () {
 
   describe('Add header policy', function () {
     it('Headers token policy should be generated', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/add-headers-token.xml')
-      var file = fs.lstatSync(filePath)
+      const filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/add-headers-token.xml')
+      const file = fs.lstatSync(filePath)
       should.equal(file.isFile(), true)
 
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('AssignMessage')
         result.should.have.property('AssignMessage').property('Set')
-        var headers = result.AssignMessage.Set[0].Headers[0]
+        const headers = result.AssignMessage.Set[0].Headers[0]
         // Check Header name and value
         should.equal(headers.Header[0].$.name, 'x-token', 'x-token not found: ')
         should.equal(headers.Header[0]._, 'random_token', 'x-token value not correct')
@@ -59,17 +59,17 @@ describe('generateApi with headers', function () {
     })
 
     it('Headers x-api-key policy should be generated', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/add-headers-x-api-key.xml')
-      var file = fs.lstatSync(filePath)
+      const filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/add-headers-x-api-key.xml')
+      const file = fs.lstatSync(filePath)
       should.equal(file.isFile(), true)
 
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('AssignMessage')
         result.should.have.property('AssignMessage').property('Set')
-        var headers = result.AssignMessage.Set[0].Headers[0]
+        const headers = result.AssignMessage.Set[0].Headers[0]
         // Check Header name and value
         should.equal(headers.Header[0].$.name, 'x-api-key', 'x-api-key not found: ')
         should.equal(headers.Header[0]._, 'random_api_key', 'x-api-key value not correct')
@@ -78,17 +78,17 @@ describe('generateApi with headers', function () {
     })
 
     it('Headers securit headers policy should be generated', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/add-headers-security.xml')
-      var file = fs.lstatSync(filePath)
+      const filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/add-headers-security.xml')
+      const file = fs.lstatSync(filePath)
       should.equal(file.isFile(), true)
 
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('AssignMessage')
         result.should.have.property('AssignMessage').property('Set')
-        var headers = result.AssignMessage.Set[0].Headers[0]
+        const headers = result.AssignMessage.Set[0].Headers[0]
         // Check Header name and value
         should.equal(headers.Header[0].$.name, 'Strict-Transport-Security', 'Strict-Transport-Security not found: ')
         should.equal(headers.Header[0]._, 'max-age=31536000; includeSubDomains; preload', 'value not correct')
@@ -103,9 +103,9 @@ describe('generateApi with headers', function () {
     })
 
     it('Target should contain header step in PreFlow', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy, '/apiproxy/targets/default.xml')
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const filePath = path.join(options.destination, options.apiProxy, '/apiproxy/targets/default.xml')
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('TargetEndpoint')
@@ -117,9 +117,9 @@ describe('generateApi with headers', function () {
     })
 
     it('Proxy should contain header step in PostFlow', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('ProxyEndpoint')

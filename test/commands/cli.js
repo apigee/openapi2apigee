@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-var path = require('path')
-var childProcess = require('child_process')
-var should = require('should')
+const path = require('path')
+const childProcess = require('child_process')
+const should = require('should')
 
 describe('openapi2apigee', function () {
   it('without arguments should return correct exit code', function (done) {

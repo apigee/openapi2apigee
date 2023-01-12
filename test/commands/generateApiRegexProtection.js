@@ -16,14 +16,14 @@ limitations under the License.
 
 'use strict'
 
-var should = require('should')
-var path = require('path')
-var generateApi = require('../../lib/commands/generateApi/generateApi')
-var fs = require('fs')
-var xml2js = require('xml2js')
+const should = require('should')
+const path = require('path')
+const generateApi = require('../../lib/commands/generateApi/generateApi')
+const fs = require('fs')
+const xml2js = require('xml2js')
 
 describe('generateApi with regex-protection', function () {
-  var options = {
+  const options = {
     source: path.join(__dirname, '/openapi_files/regex-protection.yaml'),
     destination: path.join(__dirname, '../../api_bundles'),
     apiProxy: 'petStoreRegexProtection'
@@ -40,12 +40,12 @@ describe('generateApi with regex-protection', function () {
 
   describe('Add regex-protection policy', function () {
     it('Regexp protection policy should be generated', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/regex-protection.xml')
-      var file = fs.lstatSync(filePath)
+      const filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/regex-protection.xml')
+      const file = fs.lstatSync(filePath)
       should.equal(file.isFile(), true)
 
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('Javascript')
@@ -59,8 +59,8 @@ describe('generateApi with regex-protection', function () {
     })
 
     it('Js files should be generated', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy + '/apiproxy/resources/jsc/regex-protection.js')
-      var file = fs.lstatSync(filePath)
+      let filePath = path.join(options.destination, options.apiProxy + '/apiproxy/resources/jsc/regex-protection.js')
+      let file = fs.lstatSync(filePath)
       should.equal(file.isFile(), true)
       filePath = path.join(options.destination, options.apiProxy + '/apiproxy/resources/jsc/regex-protection-querystring.js')
       file = fs.lstatSync(filePath)
@@ -72,12 +72,12 @@ describe('generateApi with regex-protection', function () {
     })
 
     it('Raise fault policy should be generated', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/raiseFault.xml')
-      var file = fs.lstatSync(filePath)
+      const filePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/raiseFault.xml')
+      const file = fs.lstatSync(filePath)
       should.equal(file.isFile(), true)
 
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('RaiseFault')
@@ -91,9 +91,9 @@ describe('generateApi with regex-protection', function () {
     })
 
     it('Proxy should contain Add Regex Protection step in PreFlow', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('ProxyEndpoint')
@@ -104,9 +104,9 @@ describe('generateApi with regex-protection', function () {
     })
 
     it('Proxy should contain Raise Regex Error step in PreFlow', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('ProxyEndpoint')
@@ -117,9 +117,9 @@ describe('generateApi with regex-protection', function () {
     })
 
     it('Proxy should contain parameter check in listPets flow', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         if (result.ProxyEndpoint.Flows[0].Flow[0].$.name === 'listPets') {
@@ -131,9 +131,9 @@ describe('generateApi with regex-protection', function () {
     })
 
     it('Proxy should contain quotaAnil in listPets flow', function (done) {
-      var filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
-      var fileData = fs.readFileSync(filePath)
-      var parser = new xml2js.Parser()
+      const filePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
+      const fileData = fs.readFileSync(filePath)
+      const parser = new xml2js.Parser()
       parser.parseString(fileData, function (err, result) {
         should.equal(err, null)
         if (result.ProxyEndpoint.Flows[0].Flow[0].$.name === 'listPets') {

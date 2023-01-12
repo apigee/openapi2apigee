@@ -16,15 +16,15 @@ limitations under the License.
 
 'use strict'
 
-var should = require('should')
-var path = require('path')
-var generateApi = require('../../lib/commands/generateApi/generateApi')
-var generateSkeleton = require('../../lib/commands/generateApi/generateSkeleton.js')
-var fs = require('fs')
+const should = require('should')
+const path = require('path')
+const generateApi = require('../../lib/commands/generateApi/generateApi')
+const generateSkeleton = require('../../lib/commands/generateApi/generateSkeleton.js')
+const fs = require('fs')
 const xml2js = require('xml2js')
 
 describe('generateApi with oauth', function () {
-  var options = {
+  const options = {
     source: path.join(__dirname, '/openapi_files/oapi.json'),
     destination: path.join(__dirname, '../../api_bundles'),
     backendurl: 'https://app-name-env.gcp.companyname.companylocation.loc/serviceName',
@@ -41,27 +41,27 @@ describe('generateApi with oauth', function () {
   })
   describe('Add oauth policy', function () {
     it('Oauth policy should be generated', function (done) {
-      var oauthFilePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/verifyAccessToken.xml')
-      var oauthFile = fs.lstatSync(oauthFilePath)
+      const oauthFilePath = path.join(options.destination, options.apiProxy + '/apiproxy/policies/verifyAccessToken.xml')
+      const oauthFile = fs.lstatSync(oauthFilePath)
       should.equal(oauthFile.isFile(), true)
 
-      var oauthFileData = fs.readFileSync(oauthFilePath)
-      var parser = new xml2js.Parser()
+      const oauthFileData = fs.readFileSync(oauthFilePath)
+      const parser = new xml2js.Parser()
       parser.parseString(oauthFileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('OAuthV2')
         result.should.have.property('OAuthV2').property('Operation')
-        var operation = result.OAuthV2.Operation
-                // Check Header name and value
+        const operation = result.OAuthV2.Operation
+        // Check Header name and value
         should.equal(operation[0], 'VerifyAccessToken', 'VerifyAccessToken operation not found: ')
         done()
       })
     })
 
     it('Proxies should contain oauth step in PreFlow', function (done) {
-      var proxiesFilePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
-      var proxiesFileData = fs.readFileSync(proxiesFilePath)
-      var parser = new xml2js.Parser()
+      const proxiesFilePath = path.join(options.destination, options.apiProxy, '/apiproxy/proxies/default.xml')
+      const proxiesFileData = fs.readFileSync(proxiesFilePath)
+      const parser = new xml2js.Parser()
       parser.parseString(proxiesFileData, function (err, result) {
         should.equal(err, null)
         result.should.have.property('ProxyEndpoint')
@@ -92,17 +92,17 @@ describe('generateApi with oauth', function () {
 
   describe('generateSkeleton', function () {
     it('generate Skeleton should create folder structure', function (done) {
-      var options = {
+      const options = {
         source: path.join(__dirname, '/openapi_files/oapi.json'),
         destination: path.join(__dirname, '../../api_bundles'),
         apiProxy: randomText()
       }
       generateSkeleton(options.apiProxy, options, function (err, reply) {
         should.equal(err, null)
-        var rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
-        var proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
-        var targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/targets'))
-        var policiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/policies'))
+        const rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
+        const proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
+        const targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/targets'))
+        const policiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/policies'))
         should.equal(rootFolder.isDirectory(), true)
         should.equal(proxiesFolder.isDirectory(), true)
         should.equal(targetsFolder.isDirectory(), true)
@@ -113,9 +113,9 @@ describe('generateApi with oauth', function () {
     it('destination path ending with / should generate Skeleton Folder', function (done) {
       generateSkeleton(options.apiProxy, options, function (err, reply) {
         should.equal(err, null)
-        var rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
-        var proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
-        var targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
+        const rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
+        const proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
+        const targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
         should.equal(rootFolder.isDirectory(), true)
         should.equal(proxiesFolder.isDirectory(), true)
         should.equal(targetsFolder.isDirectory(), true)
@@ -132,9 +132,9 @@ describe('generateApi with oauth', function () {
 })
 
 function randomText () {
-  var text = ''
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-  for (var i = 0; i < 10; i++) {
+  let text = ''
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  for (let i = 0; i < 10; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
   }
   return text

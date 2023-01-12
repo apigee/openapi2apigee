@@ -16,16 +16,16 @@ limitations under the License.
 
 'use strict'
 
-var should = require('should')
-var path = require('path')
-var generateApi = require('../../lib/commands/generateApi/generateApi')
-var generateSkeleton = require('../../lib/commands/generateApi/generateSkeleton.js')
-var fs = require('fs')
+const should = require('should')
+const path = require('path')
+const generateApi = require('../../lib/commands/generateApi/generateApi')
+const generateSkeleton = require('../../lib/commands/generateApi/generateSkeleton.js')
+const fs = require('fs')
 
 describe('generateApi', function () {
   describe('generate', function () {
     it('Incorrect openapi file should generate error..', function (done) {
-      var options = {
+      const options = {
         source: path.join(__dirname, '/openapi_files/openapi2.yaml'),
         destination: path.join(__dirname, '../../api_bundles')
       }
@@ -36,7 +36,7 @@ describe('generateApi', function () {
       })
     })
     it('Correct openapi file should not generate error..', function (done) {
-      var options = {
+      const options = {
         source: path.join(__dirname, '/openapi_files/openapi1.yaml'),
         destination: path.join(__dirname, '../../api_bundles')
       }
@@ -67,17 +67,17 @@ describe('generateApi', function () {
 
   describe('generateSkeleton', function () {
     it('generate Skeleton should create folder structure', function (done) {
-      var options = {
+      const options = {
         source: path.join(__dirname, '/openapi_files/openapi1.yaml'),
         destination: path.join(__dirname, '../../api_bundles'),
         apiProxy: randomText()
       }
       generateSkeleton(options.apiProxy, options, function (err, reply) {
         should.equal(err, null)
-        var rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
-        var proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
-        var targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/targets'))
-        var policiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/policies'))
+        const rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
+        const proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
+        const targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/targets'))
+        const policiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/policies'))
         should.equal(rootFolder.isDirectory(), true)
         should.equal(proxiesFolder.isDirectory(), true)
         should.equal(targetsFolder.isDirectory(), true)
@@ -86,16 +86,16 @@ describe('generateApi', function () {
       })
     })
     it('destination path ending with / should generate Skeleton Folder', function (done) {
-      var options = {
+      const options = {
         source: path.join(__dirname, '/openapi_files/openapi1.yaml'),
         destination: path.join(__dirname, '../../api_bundles/'),
         apiProxy: randomText()
       }
       generateSkeleton(options.apiProxy, options, function (err, reply) {
         should.equal(err, null)
-        var rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
-        var proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
-        var targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
+        const rootFolder = fs.lstatSync(path.join(options.destination, options.apiProxy))
+        const proxiesFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
+        const targetsFolder = fs.lstatSync(path.join(options.destination, options.apiProxy + '/apiproxy/proxies'))
         should.equal(rootFolder.isDirectory(), true)
         should.equal(proxiesFolder.isDirectory(), true)
         should.equal(targetsFolder.isDirectory(), true)
@@ -112,9 +112,9 @@ describe('generateApi', function () {
 })
 
 function randomText () {
-  var text = ''
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-  for (var i = 0; i < 10; i++) {
+  let text = ''
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  for (let i = 0; i < 10; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
   }
   return text

@@ -31,33 +31,31 @@ function hasOwnProperty (obj, prop) {
 var parse = function (qs, sep, eq, options) { // eslint-disable-line
   sep = sep || '&'
   eq = eq || '='
-  var obj = {}
+  const obj = {}
 
   if (typeof qs !== 'string' || qs.length === 0) {
     return obj
   }
 
-  var regexp = /\+/g
+  const regexp = /\+/g
   qs = qs.split(sep)
 
-  var maxKeys = 1000
+  let maxKeys = 1000
   if (options && typeof options.maxKeys === 'number') {
     maxKeys = options.maxKeys
   }
 
-  var len = qs.length
+  let len = qs.length
   // maxKeys <= 0 means that we should not limit keys count
   if (maxKeys > 0 && len > maxKeys) {
     len = maxKeys
   }
 
-  for (var i = 0; i < len; ++i) {
-    var x = qs[i].replace(regexp, '%20')
-    var idx = x.indexOf(eq)
-    var kstr
-    var vstr
-    var k
-    var v
+  for (let i = 0; i < len; ++i) {
+    const x = qs[i].replace(regexp, '%20')
+    const idx = x.indexOf(eq)
+    let kstr
+    let vstr
 
     if (idx >= 0) {
       kstr = x.substr(0, idx)
@@ -67,8 +65,8 @@ var parse = function (qs, sep, eq, options) { // eslint-disable-line
       vstr = ''
     }
 
-    k = decodeURIComponent(kstr)
-    v = decodeURIComponent(vstr)
+    const k = decodeURIComponent(kstr)
+    const v = decodeURIComponent(vstr)
 
     if (!hasOwnProperty(obj, k)) {
       obj[k] = v

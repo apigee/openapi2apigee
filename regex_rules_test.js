@@ -14,12 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-var elements = require('./regex_rules.json')
+const elements = require('./regex_rules.json')
 
-var print = function (m1, m2) {
+const print = function (m1, m2) {
   console.log(m1, m2)
 }
-var context = {
+const context = {
   setVariable: function (s, v) {
     console.log(s, v)
   },
@@ -28,26 +28,28 @@ var context = {
   }
 }
 
-var block = function (haystack, filters) {
+const block = function (haystack, filters) {
   filters.some(function (jsonRegex) {
     // Create a regex from the json string.
     // print('regex',jsonRegex.rule);
-    var f = new RegExp(jsonRegex.rule, jsonRegex.flags)
+    const f = new RegExp(jsonRegex.rule, jsonRegex.flags)
+    let bool = false
     // print('regex',f);
-    var hit = f.exec(haystack)
+    const hit = f.exec(haystack)
     if (hit) {
       print('found', hit[0])
       context.setVariable('FILTER.block', true)
-      return true
+      bool = true
     }
+    return bool
   })
 }
 
 elements.forEach(function (element) {
-  var filters = element.filters
+  const filters = element.filters
   if (element.element === 'QueryParam') {
     if (block(decodeURIComponent(context.proxyRequest.url), filters)) {
-      return
+      // nothing to do
     }
   }
 })
