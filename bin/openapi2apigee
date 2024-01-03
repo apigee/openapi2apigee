@@ -95,6 +95,11 @@ program.on('--help', function(){
   console.log('    $ openapi2apigee generateApi petsore-v3 -s $SRC -d ./examples_proxies');
   console.log('    $ openapi2apigee generateApi petsore-v3 -s $SRC -d ./examples_proxies -n -b $URI -o $ORG -e $ENV -v secure -D');
   console.log('');
+  console.log('OAS 3.1.0');
+  console.log('    $ export SRC=https://gist.githubusercontent.com/seriousme/55bd4c8ba2e598e416bb5543dcd362dc/raw/cf0b86ba37bb54bf1a6bf047c0ecf2a0ce4c62e0/petstore-v3.1.json');
+  console.log('    $ openapi2apigee generateApi petsore-v3_1 -s $SRC -d ./examples_proxies');
+  console.log('    $ openapi2apigee generateApi petsore-v3_1 -s $SRC -d ./examples_proxies -n -b $URI -o $ORG -e $ENV -v secure -D');
+  console.log('');
 });
 
 program.parse(process.argv);
