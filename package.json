@@ -1,6 +1,6 @@
 {
   "name": "openapi2apigee",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A tool that converts openapi yaml file to Apigee API Proxy Bundle",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/apigee/openapi2apigee",
   "dependencies": {
+    "@apidevtools/swagger-parser": "10.1.1",
     "apigeetool": "0.16.4",
     "async": "^2.1.2",
     "commander": "^2.8.1",
@@ -38,12 +39,11 @@
     "lodash.omit": "4.5.0",
     "mkdirp": "0.5.6",
     "stream-from-array": "1.0.0",
-    "@apidevtools/swagger-parser": "10.1.0",
     "xmlbuilder": "8.2.2"
   },
   "devDependencies": {
     "mocha": "^10.2.0",
-    "nyc": "^14.1.1",
+    "nyc": "^17.1.0",
     "openapi-utils-param-to-schema": "0.0.8",
     "openapi-utils-path-for-uri": "0.0.6",
     "openapi-utils-schema-from-api": "0.0.4",
