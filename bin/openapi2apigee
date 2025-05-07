@@ -45,6 +45,7 @@ program
   .option('-t, --token <token>', 'Apigee Edge Auth Token to Deploy')
   .option('-U, --backendurl <backendurl>','Specify the target backend url')
   .option('-O, --oauth <oauth>','Apigee enable oauth')
+  .option('-T, --target-server <targetserver>', 'Apigee existing target server')
 
   .description('Generates Apigee API Bundle')
   .action(function(apiProxy, options) {
